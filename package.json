@@ -1,0 +1,28 @@
+{
+  "name": "RTI-Beta-Grunt",
+  "version": "0.0.0",
+  "description": "RTI Beta Phase",
+  "main": "public/assets/index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "node-sass": "0.x",
+    "grunt": "0.4.2",
+    "grunt-contrib-clean": "0.5.0",
+    "grunt-contrib-copy": "0.5.0",
+    "grunt-contrib-watch": "0.5.3",
+    "grunt-nodemon": "0.x",
+    "grunt-sass": "~0.10.0",
+    "grunt-contrib-sass": "0.7.3",
+    "grunt-text-replace": "~0.3.10",
+    "grunt-concurrent": "~0.4.3",
+    "grunt-browser-sync": "^1.9.1"
+  },
+  "dependencies": {
+    "govuk_frontend_toolkit": "^3.1.0",
+    "govuk_template_mustache": "^0.9.1"
+  }
+}
