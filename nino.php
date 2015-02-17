@@ -1,1 +1,1 @@
-<?php include_once('public/nino.html') ?>
+<?php include_once('public/nino.html'); ?>
