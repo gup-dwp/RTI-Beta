@@ -4,7 +4,7 @@
     // http://stackoverflow.com/questions/10204378/regular-expression-to-validate-uk-national-insurance-number
     // ^\s*([a-zA-Z]){2}\s*([0-9]){1}\s*([0-9]){1}\s*([0-9]){1}\s*([0-9]){1}\s*([0-9]){1}\s*([0-9]){1}\s*([a-zA-Z]){1}?$
     // phil - '^(?!BG|GB|NK|KN|TN|NT|ZZ)[ABCEGHJ-PRSTW-Z][ABCEGHJ-NPRSTW-Z]\d{6}[A-D]$'
-    var ninoRegex   = new RegExp('(^\s*([a-zA-Z]){2}\s*([0-9]){1}\s*([0-9]){1}\s*([0-9]){1}\s*([0-9]){1}\s*([0-9]){1}\s*([0-9]){1}\s*([a-zA-Z]){1}?$)', 'g'),
+    var ninoRegex   = new RegExp('^\s*([a-zA-Z]){2}\s*([0-9]){1}\s*([0-9]){1}\s*([0-9]){1}\s*([0-9]){1}\s*([0-9]){1}\s*([0-9]){1}\s*([a-zA-Z]){1}?$', 'g'),
         ninoEntered = ninoInput.value,
         ninoSubmit  = document.querySelector('#submit-nino');
 
@@ -48,7 +48,7 @@
     //});
 
     logout.addEventListener('click', function (e) {
-      if (confirm("I'm sure I want to logout of the View Income System?") == true) {
+      if (confirm("Are you sure you want to logout of the View Income System") == true) {
         return true;
       } else {
         ninoInput.focus();
