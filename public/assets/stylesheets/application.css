@@ -711,7 +711,8 @@ fieldset {
   line-height: 1.25;
   font-weight: 400;
   text-transform: none;
-  color: #df3034; }
+  color: #df3034;
+  border-left: solid 4px #df3034; }
   @media (max-width: 640px) {
     .validation-message {
       font-size: 14px;

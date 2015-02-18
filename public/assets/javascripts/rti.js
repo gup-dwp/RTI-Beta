@@ -1,36 +1,42 @@
 (function() {
+  'use strict';
 
   var ninoValidation = function (ninoInput) {
-    // http://stackoverflow.com/questions/10204378/regular-expression-to-validate-uk-national-insurance-number
-    // ^\s*([a-zA-Z]){2}\s*([0-9]){1}\s*([0-9]){1}\s*([0-9]){1}\s*([0-9]){1}\s*([0-9]){1}\s*([0-9]){1}\s*([a-zA-Z]){1}?$
-    // phil - '^(?!BG|GB|NK|KN|TN|NT|ZZ)[ABCEGHJ-PRSTW-Z][ABCEGHJ-NPRSTW-Z]\d{6}[A-D]$'
-    var ninoRegex   = new RegExp('^\s*([a-zA-Z]){2}\s*([0-9]){1}\s*([0-9]){1}\s*([0-9]){1}\s*([0-9]){1}\s*([0-9]){1}\s*([0-9]){1}\s*([a-zA-Z]){1}?$', 'g'),
-        ninoEntered = ninoInput.value,
-        ninoSubmit  = document.querySelector('#submit-nino');
+    // http://www.c-sharpcorner.com/uploadfile/aa04e6/collection-of-regular-expression/
+    // ^[A-CEGHJ-PR-TW-Z]{1}[A-CEGHJ-NPR-TW-Z]{1}[0-9]{6}[A-DFM]{0,1}$
+    // phil g - '^(?!BG|GB|NK|KN|TN|NT|ZZ)[ABCEGHJ-PRSTW-Z][ABCEGHJ-NPRSTW-Z]\d{6}[A-D]$'
+    var ninoRegex   = new RegExp('^(?!BG|GB|NK|KN|TN|NT|ZZ)[A-CEGHJ-PR-TW-Z]{1}[A-CEGHJ-NPR-TW-Z]{1}[0-9]{6}[A-D]{0,1}$', 'ig'),
+        ninoEntered = ninoInput.value;
 
-        if (ninoEntered.match(ninoRegex)) {
-          errorMsg('remove',ninoInput);
-          ninoSubmit.disabled = false;
-        }
-        else if (! ninoInput.classList.contains('error')){
-          errorMsg('add',ninoInput,'You have entered an incorrect National Insurance Number');
-          ninoSubmit.disabled = true;
+        if (! ninoEntered.match(ninoRegex)) {
+          errorMsg('add',ninoInput,'Please enter a National Insurance number in the correct format');
+          return false;
+        } else {
+          errorMsg('remove',ninoInput,'');
+          return true;
         }
   };
 
   var errorMsg = function (action,input,msgText) {
-    var msgBox  = document.createElement('div'),
-        msgText = document.createTextNode(msgText);
+    var msgBox   = document.createElement('div'),
+        msgText  = document.createTextNode(msgText),
+        ninoForm = document.querySelector('#form-nino');
 
     if (action === 'add') {
-      input.classList.add('error');
-      msgBox.classList.add('error-msg');
-      msgBox.appendChild(msgText);
-      input.parentNode.appendChild(msgBox);
+      input.classList.add('invalid');
+      input.parentNode.classList.add('invalid');
+
+      if (!document.querySelector('.validation-message')) {
+        msgBox.classList.add('validation-message');
+        msgBox.appendChild(msgText);
+        ninoForm.insertBefore(msgBox,ninoForm.lastChild.previousSibling);
+      }
     }
-    else if (input.classList.contains('error')){
-      input.classList.remove('error');
-      input.parentNode.removeChild(document.querySelector('.error-msg'));
+    else {
+      input.classList.remove('invalid');
+
+      input.parentNode.classList.remove('invalid');
+      document.querySelector('#form-nino').removeChild(document.querySelector('.validation-message'));
     }
   }
 
@@ -39,23 +45,21 @@
         ninoInput = document.querySelector('#input-nino'),
         logout    = document.querySelector('#logout');
 
-    ninoInput.addEventListener('blur', function (e) {
-      ninoValidation(this);
-    })
-
-    //ninoForm.addEventListener('submit', function (e) {
-
-    //});
+    ninoForm.addEventListener('submit', function (e) {
+      if(ninoValidation(ninoInput) === false) {
+        e.preventDefault();
+      }
+    });
 
     logout.addEventListener('click', function (e) {
       if (confirm("Are you sure you want to logout of the View Income System") == true) {
         return true;
       } else {
         ninoInput.focus();
-        errorMsg('remove',ninoInput)
         e.preventDefault();
       }
     });
+
   };
 
   return {

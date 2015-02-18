@@ -65,4 +65,5 @@
   display: block;
   @include core-16;
   color: $error-colour;
+  border-left: solid 4px $error-colour;
 }

@@ -35,8 +35,6 @@
   <body class="">
     <script type="text/javascript">document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');</script>
 
-
-
     <div id="skiplink-container">
       <div>
         <a href="#content" class="skiplink">Skip to main content</a>
@@ -92,7 +90,10 @@
     <div class="form-group">
       <label class="form-label-bold" for="nino">National Insurance number</label>
       <p class="form-hint text">For example, 'QQ 12 34 56 C'.</p>
-      <input type="text" class="form-control" name="nino" id="input-nino" maxlength="9" autofocus>
+      <div class="validation-wrapper">
+        <input type="text" class="form-control" name="nino" id="input-nino" maxlength="9" autofocus>
+      </div>
+
     </div>
 
     <div class="form-group">
@@ -113,8 +114,9 @@
       </fieldset>
     </div>
 
+    
     <div class="form-group">
-      <input type="submit" disabled="disabled" id="submit-nino" class="button" value="Continue">
+      <input type="submit" id="submit-nino" class="button" value="Continue">
     </div>
 
   </form>
