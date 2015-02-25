@@ -1,6 +1,15 @@
 (function() {
   'use strict';
 
+  var getChecked = function (inputGroup) {
+    for (var i = 0; i < inputGroup.length; i++) {
+      if (inputGroup[i].checked) {
+        var inputValue = inputGroup[i].value;
+      }
+    }
+    return inputValue;
+  }
+
   var ninoValidation = function (ninoInput) {
     // http://www.c-sharpcorner.com/uploadfile/aa04e6/collection-of-regular-expression/
     // ^[A-CEGHJ-PR-TW-Z]{1}[A-CEGHJ-NPR-TW-Z]{1}[0-9]{6}[A-DFM]{0,1}$
@@ -34,21 +43,26 @@
     }
     else {
       input.classList.remove('invalid');
-
       input.parentNode.classList.remove('invalid');
       document.querySelector('#form-nino').removeChild(document.querySelector('.validation-message'));
     }
   }
 
   var bindEvents = function () {
-    var ninoForm  = document.querySelector('#form-nino'),
-        ninoInput = document.querySelector('#input-nino'),
-        logout    = document.querySelector('#logout');
+    var ninoForm   = document.querySelector('#form-nino'),
+        ninoInput  = document.querySelector('#input-nino'),
+        logout     = document.querySelector('#logout'),
+        radioGroup = document.getElementsByName('radioGroup');
 
     ninoForm.addEventListener('submit', function (e) {
+      sessionStorage.nino = ninoInput.value;
+      sessionStorage.someKey = 'someValue';
+      sessionStorage.setItem("duration", getChecked(radioGroup));
+
       if(ninoValidation(ninoInput) === false) {
         e.preventDefault();
       }
+
     });
 
     logout.addEventListener('click', function (e) {

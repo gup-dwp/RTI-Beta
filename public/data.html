@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <!--[if lt IE 9]><html class="lte-ie8" lang=""><![endif]-->
 <!--[if gt IE 8]><!--><html lang=""><!--<![endif]-->
@@ -28,14 +26,13 @@
     <meta property="og:image" content="/public/images/opengraph-image.png?0.12.0">
 
     <link href="assets/stylesheets/application.css" media="screen" rel="stylesheet" type="text/css" />
+    <link href="assets/stylesheets/examples.css" media="screen" rel="stylesheet" type="text/css" />
     <link href="assets/stylesheets/rti.css" media="screen" rel="stylesheet" type="text/css" />
 
   </head>
 
   <body class="">
     <script type="text/javascript">document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');</script>
-
-
 
     <div id="skiplink-container">
       <div>
@@ -60,6 +57,10 @@
             <a href="#proposition-links" class="js-header-toggle menu">Menu</a>
             <nav id="proposition-menu">
               <a href="login" id="proposition-name">View Income </a>
+              <ul id="proposition-links">
+                <li><a href="nino.html">New Search</a></li>
+                <li><a id="logout" href="login.html">Log Out</a></li>
+              </ul>
             </nav>
           </div>
         </div>
@@ -84,10 +85,17 @@
   </div>
 
   <form action="./nino" method="post" class="form">
-  <h1 class="form-title heading-large">Data</h1>
 
+    <h1 class="heading-large">Income for <span class="person-name"></span></h1>
+    <div class="grid-row">
+      <div class="column-half">
+        <h2 class="bold-medium">National Insurance Number: <span class="person-nino"></span></h2>
+      </div>
+    </div>
 
-</form>
+    <div class="income-details"></div>
+
+  </form>
 </main>
 
 <footer class="group js-footer" id="footer" role="contentinfo">
@@ -95,14 +103,27 @@
 </footer>
 
 <!--end footer-->
+<div class="modal fade " id="deductions-modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close pull-right" data-dismiss="modal">
+          <span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+          <h4 class="heading-small" id="popupTitle">Deductions breakdown...</h4>
+        </div>
+        <div class="modal-body"></div>
+    </div>
+  </div>
+</div>
 
 <div id="global-app-error" class="app-error hidden"></div>
 
 <!-- govuk_elements js -->
 <script src="/assets/javascripts/modernizr.custom.77028.js"></script>
 <script src="/assets/javascripts/details.polyfill.js"></script>
-
-<script src="/assets/javascripts/rti.js"></script>
+<script src="/assets/javascripts/vendor/jquery.js"></script>
+<script src="/assets/javascripts/vendor/bootstrap-modal.js"></script>
+<script src="/assets/javascripts/data.js"></script>
 
 </body>
 </html>
